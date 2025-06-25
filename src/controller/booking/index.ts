@@ -53,4 +53,62 @@ export const createBooking = async (req: Request, res: Response) => {
     }
 }
 
+export const getBooking = async(req:Request, res:Response) => {
+    try{
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+  const query: any = {};
+  
+  const total = await Booking.countDocuments(query);
+  const booking = await Booking.find(query).skip((page-1)*limit).limit(limit).sort({createdAt:-1});
+  return res.status(200).json({
+    status: true,
+    data: booking,
+    total,
+    page,
+    limit,
+    totalpages: Math.ceil(total/limit)
+  })
+    }
+    catch(err:any){
+         return res.status(500).json({
+            status: false,
+            message: "Something went wrong",
+        });
+    }
+}
+
+export const cancelBooking = async(req: Request, res: Response) => {
+ try{
+    const bookingId = req.params.id;
+    const booking = await Booking.findById(bookingId);
+    const {reason} = req.body;
+
+    if(!booking){
+        return res.status(404).json({
+            status: false,
+            message: "Booking not found",
+        });  
+    }
+    if(booking?.status === 'CANCELLED' || booking?.status === 'COMPLETED'){
+        return res.status(400).json({
+            status: false,
+            message: "Booking is already cancelled",
+        })
+    }
+    booking.status = "CANCELLED";
+    booking.cancellationReason = reason ||'No reason',
+    await booking.save();
+     res.status(200).json({
+      status: true,
+      message: "Booking cancelled successfully",
+      data: booking
+    });
+ }catch(err: any){
+    return res.status(500).json({
+            status: false,
+            message: "Something went wrong",
+        });
+ }
+}
 
