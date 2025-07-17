@@ -82,7 +82,7 @@ export const cancelBooking = async(req: Request, res: Response) => {
  try{
     const bookingId = req.params.id;
     const booking = await Booking.findById(bookingId);
-    const {reason} = req.body;
+    const {cancellationReason} = req.body;
 
     if(!booking){
         return res.status(404).json({
@@ -90,14 +90,14 @@ export const cancelBooking = async(req: Request, res: Response) => {
             message: "Booking not found",
         });  
     }
-    if(booking?.status === 'CANCELLED' || booking?.status === 'COMPLETED'){
+    if(booking?.status === 'CANCELLED'){
         return res.status(400).json({
             status: false,
             message: "Booking is already cancelled",
         })
     }
     booking.status = "CANCELLED";
-    booking.cancellationReason = reason ||'No reason',
+    booking.cancellationReason = cancellationReason ||'No reason',
     await booking.save();
      res.status(200).json({
       status: true,
@@ -112,3 +112,34 @@ export const cancelBooking = async(req: Request, res: Response) => {
  }
 }
 
+export const completeBooking = async(req:Request, res:Response) =>{
+try{
+    const bookingId = req.params.id;
+    const booking = await Booking.findById(bookingId);
+    if(!booking){
+        return res.status(404).json({
+            status: false,
+            message: "Booking not found",
+        })
+    }
+    if(booking?.status === 'COMPLETED'){
+        return res.status(400).json({
+            data:booking,
+            status: false,
+            message: "Booking is already completed",
+        });
+    }
+   booking.status = "COMPLETED";
+   await booking.save();
+    return res.status(400).json({
+        data:booking,
+        status: true,
+        message: "Booking completed successfully",
+    })
+}catch(err: any){
+    return res.status(500).json({
+            status: false,
+            message: "Something went wrong",
+        });
+}
+}

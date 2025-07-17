@@ -7,7 +7,7 @@ import { createBusiness, getBusiness } from "../controller/business";
 import upload from "../middleware/upload";
 import { createCategory, getCategory } from "../controller/category";
 import { createSubcategory, getSubcategory } from "../controller/subcategory";
-import { cancelBooking, createBooking, getBooking } from "../controller/booking";
+import { cancelBooking, completeBooking, createBooking, getBooking } from "../controller/booking";
 
 const router = express.Router();
 
@@ -25,7 +25,6 @@ router.post("/business",userAuth,upload.fields([
 );
 router.get('/business', userAuth, getBusiness);
 
-
 //services
 router.post('/category', upload.single('icon_image'), createCategory);
 router.get('/get-category', getCategory);
@@ -35,7 +34,7 @@ router.get('/get-subcategory', getSubcategory);
 // booking
 router.post('/booking', userAuth, createBooking);
 router.get('/get-booking', getBooking);
-router.patch('/booking/:id/cancel', cancelBooking)
-
+router.patch('/booking/:id/cancel', cancelBooking);
+router.patch('/booking/:id/completed', completeBooking)
 
 export default router;
