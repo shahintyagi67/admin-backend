@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import { isEmailValid } from "../../lib/common";
-import { IUser } from "../../lib/interface/customer";
-import User from "../../model/customer";
+import { isEmailValid } from "../../lib/common/index.js";
+import { IUser } from "../../lib/interface/customer/index.js";
+import User from "../../model/customer/index.js";
 import jwt from "jsonwebtoken";
 
 

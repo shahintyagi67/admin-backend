@@ -1,4 +1,4 @@
-import Category from "../../model/category";
+import Category from "../../model/category/index.js";
 import { Request, Response } from "express";
 
 export const createCategory = async(req: Request, res: Response) => {

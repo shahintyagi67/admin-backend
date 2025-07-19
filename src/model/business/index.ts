@@ -1,5 +1,5 @@
 import mongoose, { Types } from "mongoose";
-import { IBusiness } from "../../lib/interface/business";
+import { IBusiness } from "../../lib/interface/business/index.js";
 
 const businessSchema = new mongoose.Schema<IBusiness>({
     userId: {

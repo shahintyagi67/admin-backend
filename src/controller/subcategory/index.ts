@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Subcategory from "../../model/subcategory";
-import Category from "../../model/category"; 
+import Subcategory from "../../model/subcategory/index.js";
+import Category from "../../model/category/index.js"; 
 import { stat } from "fs";
 
 export const createSubcategory = async (req: Request, res: Response) => {

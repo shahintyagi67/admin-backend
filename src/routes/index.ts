@@ -1,13 +1,15 @@
 import express from "express";
-import {
-  customerController,
-} from "../controller/customer";
-import { userAuth } from "../middleware/auth";
-import { createBusiness, getBusiness } from "../controller/business";
-import upload from "../middleware/upload";
-import { createCategory, getCategory } from "../controller/category";
-import { createSubcategory, getSubcategory } from "../controller/subcategory";
-import { cancelBooking, completeBooking, createBooking, getBooking } from "../controller/booking";
+// import {
+//   customerController,
+// } from "../controller/customer";
+import {customerController} from '../controller/customer/index.js'; // ✅ Explicit file import
+// import { userAuth } from "../middleware/auth/index.js";
+import { userAuth } from "../middleware/auth/index.js";
+import { createBusiness, getBusiness } from "../controller/business/index.js";
+import upload from "../middleware/upload/index.js";
+import { createCategory, getCategory } from "../controller/category/index.js";
+import { createSubcategory, getSubcategory } from "../controller/subcategory/index.js";
+import { cancelBooking, completeBooking, createBooking, getBooking } from "../controller/booking/index.js";
 
 const router = express.Router();
 

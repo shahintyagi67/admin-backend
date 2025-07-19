@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
-import { handleForgotPassword, handleOtpVerification, handleResendOtp, handleResetPassword, handleUserLogin, handleUserSignup } from "../../services/common";
-import { makeResponse } from "../../lib/common";
+import { handleForgotPassword, handleOtpVerification, handleResendOtp, handleResetPassword, handleUserLogin, handleUserSignup } from "../../services/common/index.js";
+import { makeResponse } from "../../lib/common/index.js";
 
 
 const router = Router();

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Booking from "../../model/booking";
-import Business from "../../model/business";
+import Booking from "../../model/booking/index.js";
+import Business from "../../model/business/index.js";
 
 export interface RequestWithUser extends Request {
     user: {id: string}

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Business from "../../model/business";
+import Business from "../../model/business/index.js";
 
 
 export interface RequestWithUser extends Request {

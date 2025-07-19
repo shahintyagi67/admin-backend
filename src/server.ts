@@ -2,8 +2,10 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import connectDB from "./loader/database";
-import authRoutes from "./routes";
+// import connectDB from "./loader/database/index";
+import connectDB from "./loader/database/index.js";
+// import authRoutes from "./routes";
+import authRoutes from "./routes/index.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
