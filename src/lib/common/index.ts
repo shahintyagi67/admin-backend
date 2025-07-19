@@ -6,7 +6,7 @@ export const makeResponse = async (
   statusCode: number,
   success: boolean,
   message: string,
-  payload: any
+  payload: any ={}
 ): Promise<any> =>
   new Promise(resolve => {
     res.status(statusCode).send({

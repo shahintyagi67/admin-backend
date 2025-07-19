@@ -10,7 +10,31 @@ export interface IBusiness extends Document {
       documents: string[];
       document_id: string;
     }
-    location: string,
+    location: {
+  type: 'Point';
+  coordinates: [number, number]; 
+};
+plan: {
+  plan_name: string;
+  plan_price: string;
+  plan_description: string;
+  plan_image: string;
+  isNegotiable?: boolean;
+}[];
+
+service: {
+  category: Types.ObjectId;
+  subcategory: Types.ObjectId[];
+};
+  locationDetails?: {
+        place_number?: string;
+        floor?: string;
+        street?: string;
+        landmark?: string;
+    };
+      businessImage?: string[];
+    flayer?: string;
+     status?: "PENDING" | "APPROVED" | "REJECTED";
     name: string,
     icon: string,
     timing:[]

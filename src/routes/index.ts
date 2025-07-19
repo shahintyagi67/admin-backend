@@ -21,20 +21,20 @@ router.post("/business",userAuth,upload.fields([
     { name: "flayer", maxCount: 1 },
     { name: "plan_image", maxCount: 1 } 
   ]),
-  createBusiness
+  createBusiness as unknown as express.RequestHandler
 );
-router.get('/business', userAuth, getBusiness);
+router.get('/business', userAuth, getBusiness as unknown as express.RequestHandler);
 
 //services
-router.post('/category', upload.single('icon_image'), createCategory);
-router.get('/get-category', getCategory);
-router.post('/subcategory', createSubcategory);
-router.get('/get-subcategory', getSubcategory);
+router.post('/category', upload.single('icon_image'), createCategory  as unknown as express.RequestHandler);
+router.get('/get-category', getCategory as unknown as express.RequestHandler);
+router.post('/subcategory', createSubcategory as unknown as express.RequestHandler);
+router.get('/get-subcategory', getSubcategory as unknown as express.RequestHandler);
 
 // booking
-router.post('/booking', userAuth, createBooking);
-router.get('/get-booking', getBooking);
-router.patch('/booking/:id/cancel', cancelBooking);
-router.patch('/booking/:id/completed', completeBooking)
+router.post('/booking', userAuth, createBooking as unknown as express.RequestHandler);
+router.get('/get-booking', getBooking as unknown as express.RequestHandler);
+router.patch('/booking/:id/cancel', cancelBooking as unknown as express.RequestHandler);
+router.patch('/booking/:id/completed', completeBooking as unknown as express.RequestHandler)
 
 export default router;

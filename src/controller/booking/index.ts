@@ -2,7 +2,24 @@ import { Request, Response } from "express";
 import Booking from "../../model/booking";
 import Business from "../../model/business";
 
-export const createBooking = async (req: Request, res: Response) => {
+export interface RequestWithUser extends Request {
+    user: {id: string}
+}
+
+export interface IPlan {
+    _id:string,
+    name: string,
+    price:string,
+}
+
+export interface IBusiness {
+  _id: string;
+  name: string;
+  email: string;
+  plan: IPlan[];
+}
+
+export const createBooking = async (req: RequestWithUser, res: Response) => {
     const userId = req.user?.id;
     console.log("userId",userId);
     if (!userId) {
@@ -10,14 +27,14 @@ export const createBooking = async (req: Request, res: Response) => {
     }
     const { booking_location, businessId, booking_datetime, planId, total_amount, tax,final_amount, customer_req, quantity } = req.body;
     try {
-        const business = await Business.findById(businessId);
+        const business = await Business.findById(businessId).lean<IBusiness>();
         console.log("BusinessId", businessId)
         if (!business) {
             return res.status(404).json({ status: false, message: 'Business Not found' })
         }
 
         // const selectedPlan = business.plan.find( p => p.plan._id === planId);
-        const selectedPlan = business.plan.find(p => p._id?.toString() === planId);
+        const selectedPlan = business.plan.find((p:IPlan) => p._id?.toString() === planId);
         console.log("PlanId",planId)
         if(!selectedPlan){
             return res.status(404).json({

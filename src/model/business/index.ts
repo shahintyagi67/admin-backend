@@ -3,7 +3,7 @@ import { IBusiness } from "../../lib/interface/business";
 
 const businessSchema = new mongoose.Schema<IBusiness>({
     userId: {
-        type: Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
